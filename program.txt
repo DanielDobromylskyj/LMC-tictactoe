@@ -1,0 +1,99 @@
+BRA takeIn
+Board1  DAT 45
+Board2  DAT 45
+Board3  DAT 45
+Blank1  DAT 32
+Board4  DAT 45
+Board5  DAT 45
+Board6  DAT 45
+Blank2  DAT 32
+Board7  DAT 45
+Board8  DAT 45
+Board9  DAT 45
+Blank3  DAT 32
+// Take Input
+takeIn  INP
+        SUB one
+        SUB four
+        STA coord
+        INP
+        SUB one
+        BRA mulY
+// UpdateBoard
+tokUpd  LDA tokenPo
+        ADD coord
+        STA tokenPo
+        LDA player
+        BRZ loadP2
+        LDA player1
+        BRA tokenPo
+loadP2  LDA player2
+tokenPo STA Board1
+        LDA tokenPo
+        SUB coord
+        STA tokenPo
+display LDA eleven
+        STA SP
+        LDA frame
+        BRZ disLoop
+        LDA SR_size
+        STA counter
+buffer  LDA Blank1
+        OTC
+        LDA counter
+        SUB one
+        STA counter
+        BRP buffer
+// Display
+disLoop LDA Board1
+        OTC
+        LDA disLoop
+        ADD one
+        STA disLoop
+        LDA SP
+        SUB one
+        STA SP
+        BRP disLoop
+// Reset Screen Data
+        LDA disLoop
+        SUB twelve
+        STA disLoop
+        LDA frame
+        ADD one
+        STA frame
+// Check for win
+// Loop
+        LDA player
+        BRZ switch1
+        LDA zero
+        STA player
+        BRA takeIn
+switch1 LDA one
+        STA player
+        BRA takeIn
+// End Program
+END     HLT
+// Sub Programs
+mulY    STA counter
+mulLoop LDA coord
+        ADD four
+        STA coord
+        LDA counter
+        SUB one
+        STA counter
+        BRP mulLoop
+        BRA tokUpd
+SP      DAT 1
+zero    DAT 0
+one     DAT 1
+three   DAT 3
+four    DAT 4
+eleven  DAT 11
+twelve  DAT 12
+player  DAT 0
+player1 DAT 79
+player2 DAT 88
+coord   DAT 0
+counter DAT 0
+frame   DAT 0
+SR_size DAT 19
