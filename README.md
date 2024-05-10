@@ -2,6 +2,8 @@ A new LMC game to play!
 
 How To Play:
 
+Before running, Turn on "default fast"
+
 Input a x then y coordinate (1-3)
 Then, wait for it to draw to the screen.
 Then, repeat for the next player.
